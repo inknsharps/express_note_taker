@@ -20,14 +20,22 @@ app.use(express.static("public"));
 app.get("/", (req, res) => res.sendFile(path.join(__dirname, "index.html")));
 
 // Notes page
-app.get("/notes", (req, res) => res.sendFile(path.join(__dirname, "/public/notes.html")));
+app.get("/notes", (req, res) => res.sendFile(path.join(__dirname, "./public/notes.html")));
 
 // Get the DB JSON file
 app.get("/api/notes", (req, res) => res.json(db));
 
 // Post requests for adding to the DB
 app.post("/api/notes", (req, res) => {
-
+    const newNote = req.body;
+    console.log(newNote);
+    db.push(newNote);
+    console.log(db);
+    fs.writeFile("./db/db.json", JSON.stringify(db), err => {
+        if (err) throw err;
+        console.log("Saved notes updated!");
+    })
+    res.json(newNote);
 })
 
 // Starts server listening
