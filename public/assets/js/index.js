@@ -64,18 +64,13 @@ const renderActiveNote = () => {
   }
 };
 
-const handleNoteSave = async () => {
-  // ID is based on the array index
-  let fetchedNotes = await getNotes().then(async (notes) => {
-    let savedNotes = await notes.json();
-    return savedNotes;
-  })
-  console.log(fetchedNotes);
+const handleNoteSave = () => {
+  // ID is based on the title in lowercase, with spaces removed 
   const newNote = {
     title: noteTitle.value,
     text: noteText.value,
-    id: fetchedNotes.length + 1
-  };
+    id: noteTitle.value.toLowerCase().replace(/[^a-zA-Z0-9]+/g,"")
+  }
   saveNote(newNote).then(() => {
     getAndRenderNotes();
     renderActiveNote();
