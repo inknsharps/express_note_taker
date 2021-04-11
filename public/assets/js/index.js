@@ -64,10 +64,17 @@ const renderActiveNote = () => {
   }
 };
 
-const handleNoteSave = () => {
+const handleNoteSave = async () => {
+  // ID is based on the array index
+  let fetchedNotes = await getNotes().then(async (notes) => {
+    let savedNotes = await notes.json();
+    return savedNotes;
+  })
+  console.log(fetchedNotes);
   const newNote = {
     title: noteTitle.value,
     text: noteText.value,
+    id: fetchedNotes.length + 1
   };
   saveNote(newNote).then(() => {
     getAndRenderNotes();
@@ -103,6 +110,8 @@ const handleNoteView = (e) => {
 // Sets the activeNote to and empty object and allows the user to enter a new note
 const handleNewNoteView = (e) => {
   activeNote = {};
+  noteTitle.removeAttribute('readonly');
+  noteText.removeAttribute('readonly');
   renderActiveNote();
 };
 
