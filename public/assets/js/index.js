@@ -69,7 +69,7 @@ const handleNoteSave = () => {
   const newNote = {
     title: noteTitle.value,
     text: noteText.value,
-    id: noteTitle.value.toLowerCase().replace(/[^a-zA-Z0-9]+/g,"")
+    // id: noteTitle.value.toLowerCase().replace(/[^a-zA-Z0-9]+/g,"")
   }
   saveNote(newNote).then(() => {
     getAndRenderNotes();

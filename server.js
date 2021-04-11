@@ -3,6 +3,7 @@ const express = require("express");
 const path = require("path");
 const fs = require("fs");
 const db = require("./db/db.json");
+const { v4: uuidv4 } = require('uuid');
 
 // Set up Express app
 const app = express();
@@ -28,8 +29,9 @@ app.get("/api/notes", (req, res) => res.json(db));
 // Post requests for adding to the DB
 app.post("/api/notes", (req, res) => {
     const newNote = req.body;
+    newNote.id = uuidv4();
     db.push(newNote);
-    console.log(`Writing note: "${newNote.title}" with content: "${newNote.text}" to db...`);
+    console.log(`Writing note: "${newNote.title}" with content: "${newNote.text}" and id: ${newNote.id}to db...`);
     fs.writeFile("./db/db.json", JSON.stringify(db), err => {
         if (err) throw err;
         console.log("Saved notes updated!");
