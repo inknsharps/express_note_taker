@@ -18,8 +18,17 @@ A deployed version can be found [here](https://guarded-falls-08078.herokuapp.com
 ```
     npm start
 ```
-By default, the developement server will be hosted on `localhost:3001`.
+By default, the development server will be hosted on `localhost:3001`.
 
 ## Usage
 
-## Credits
+* Click on the "Get Started" button to navigate to the notes page.
+* When the note title and field is empty, you can input new text.
+* Save your note by clicking the save button.
+* You can access saved notes by clicking on the title of the note.
+* You can delete saved notes by clicking on the delete button beside the note's title.
+* If you want to make a new, click the new note button (it will automatically do that when you save a note.)
+
+## Demo
+
+<img src=./demo.gif>
